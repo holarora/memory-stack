@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "snippets/tasks.css" %}">
+  <link rel="stylesheet" href="{% static "snippets/form.css" %}">
+  <link rel="stylesheet" href="{% static "snippets/includes/header.css" %}">
+{% endblock %}
+
+{% block page_title %} Update Task {% endblock %}
+
+{% block content %}
+  {% include "./includes/header.html" %}
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save changes</button>
+  </form>
+
+{% endblock %}

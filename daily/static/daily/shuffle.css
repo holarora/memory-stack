@@ -1,0 +1,141 @@
+.shuffle-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-image: url("images/poker-cards.png");
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Styles for the popup and overlay */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    opacity: 1; /* Should be 1 initially */
+    visibility: visible; /* Should be visible initially */
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+#overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.entry-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    padding: 0;
+    border-radius: 8px;
+    z-index: 1001;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.entry-popup.hidden {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+}
+
+/* Styles for the shuffling effect */
+.card-container {
+    position: relative; /* Changed from relative to absolute for better centering */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the container */
+    width: 120px; /* Width to fit the cards */
+    height: 160px; /* Height to fit the cards */
+    overflow: hidden;
+    text-align: center;
+    z-index: 1;
+}
+
+.blank-card {
+    position: absolute;
+    width: 100px;
+    height: 150px;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform-origin: center;
+    opacity: 0;
+    top: 35%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.final-card {
+    width: 70vw;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 12px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin: 0 auto;
+    transition: opacity 1s ease-in-out;
+    z-index: 3;
+}
+
+.final-text {
+    font-size: 14px;
+    color: white;
+    margin: 50px auto 0;
+    width: fit-content;
+    display: block;
+    text-align: center;
+    transition: opacity 1s ease-in-out;
+}
+
+.final-card.reveal {
+    opacity: 1;
+}
+
+.card-shuffle-animation {
+    animation: shuffle 1.3s ease-in-out forwards;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+@keyframes shuffle {
+    0% {
+        transform: rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+    25% {
+        transform: rotateY(180deg) scale(0.8);
+        opacity: 0.5;
+    }
+    50% {
+        transform: rotateY(360deg) scale(1.2);
+        opacity: 0.3;
+    }
+    75% {
+        transform: rotateY(540deg) scale(0.8);
+        opacity: 0.5;
+    }
+    100% {
+        transform: rotateY(720deg) scale(1);
+        opacity: 1;
+    }
+}
+

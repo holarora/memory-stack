@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "snippets/tasks.css" %}">
+  <link rel="stylesheet" href="{% static "snippets/form.css" %}">
+  <link rel="stylesheet" href="{% static "snippets/includes/header.css" %}">
+{% endblock %}
+
+{% block page_title %} 今日の予定 {% endblock %}
+
+{% block content %}
+  {% include "./includes/header.html" %}
+  <p>Total Number of Tasks: {{ total_number_of_tasks }}</p>
+
+  <form method="GET" action="{% url 'alltasks' %}" class="search-form">
+    {{ search_form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+
+  <form method="POST" class="main-form">
+    {% csrf_token %}
+    {% for field in form%}
+    <div class="form-control {% if form.review_text.errors %}errors{% endif %}">
+      {{ field.label_tag}}
+      {{ field }}
+      {{ field.errors }}
+    </div>
+    {% endfor%}
+      <button type="submit">Send</button>
+  </form>
+
+  <ul>
+    {% for x in mytasks %}
+    <a href="{% url 'edit_task' x.slug %}" class="update-button">Update</a>
+    <li>
+      <a href="{% url 'onetask' x.slug %}" class="task-name">{{ x.taskName|title }}</a><br>
+      <span class="task-step">{{ x.step }}</span><br>
+      <span class="task-duedate">{{ x.duedate }}</span><br>
+      <span class="task-memo">{{ x.memo }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

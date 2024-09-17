@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "daily/entries.css" %}">
+<link rel="stylesheet" href="{% static "daily/base.css" %}">
+<link rel="stylesheet" href="{% static "daily/shuffle.css" %}">
+{% endblock %}
+
+{%block page_title %}
+  likaのスタック領域/it's a <br>
+  ⛤Memory Stack⛤
+{% endblock %}
+
+{% block content %}
+<ul>
+  {% for x in recent_entries %}
+  <li>
+    {% if forloop.first %}
+    <span class="entry-date">
+      {{ x.date|date:"M d, Y" }} {{ x.date|japanese_weekday }} </span
+    ><br />
+    {% else %}
+    <span class="entry-date">
+      {{ x.date|date:"M d" }} {{ x.date|japanese_weekday }} </span
+    ><br />
+    {% endif %}
+    <span class="entry-weather">
+      {{ x.weather.name }}
+      <img
+        src="{{ x.weather.icon.url }}"
+        alt="{{ x.weather.name }}"
+        class="weather-icon"
+      /> </span
+    ><br />
+    <span class="entry-content {% if x.content|is_chinese_only %}chinese-text{% else %}default-text{% endif %}">
+      {{ x.content|linebreaks|safe }}
+  </span><br />
+    {% if x.images.all %}
+    <div class="entry-images">
+      {% for image in x.images.all %}
+      <img
+        src="{{ image.file.url }}"
+        alt="Image for {{ x.date }}"
+        class="entry-image"
+      />
+      {% endfor %}
+    </div>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+<div class="ending">- follow for more -</div>
+
+<div class="shuffle-button" onclick="showRandomEntry()"></div>
+<div id="random-entry-popup" class="entry-popup hidden">
+  <div id="card-container">
+    {% comment %} <div class="card blank-card"></div> {% endcomment %}
+    <div class="card blank-card"></div>
+    <div class="card blank-card"></div>
+    <div class="final-card hidden"></div>
+    <div class="final-text hidden" id="final-text"> 今日のスタックがシャッフルされた  <br>
+    Please wait till tomorrow for another shuffle <br>
+  - - - - -</div>
+  </div>
+</div>
+<div id="overlay" class="overlay hidden"></div>
+
+<ul id="hidden-older-entries" class="hidden" style="display: none;">
+  {% for x in older_entries %}
+  <li>
+    <span class="entry-date">{{ x.date|date:"M d, Y" }}</span><br />
+    <span class="entry-weather">{{ x.weather.name }}
+      <img src="{{ x.weather.icon.url }}" alt="{{ x.weather.name }}" class="weather-icon" />
+    </span><br />
+    <span class="entry-content">{{ x.content|linebreaks|safe }}</span><br />
+    {% if x.images.all %}
+    <div class="entry-images">
+      {% for image in x.images.all %}
+      <img src="{{ image.file.url }}" alt="Image for {{ x.date }}" class="entry-image" />
+      {% endfor %}
+    </div>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
+
+{% block js_files %}
+<script type="module" src="{% static "daily/js/randomEntry.js" %}"></script>
+<script type="module" src="{% static "daily/js/cookie_utils.js" %}"></script>
+{% endblock %}

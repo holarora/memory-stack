@@ -1,0 +1,165 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr)
+}
+
+li {
+  list-style-type: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 12px;
+  margin-left: 12px;
+  margin-right: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  line-height: 1.6;
+}
+
+li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: #f0f0f0;
+  border-radius: 5px;
+}
+
+li::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.entry-meta {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.entry-date {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.entry-weather {
+  font-size: 0.8em;
+  color: #888;
+}
+
+.weather-icon {
+  max-width: 28px;
+  height: auto;
+  vertical-align: middle;
+  margin-left: 0px;
+  margin-bottom: 5px;
+}
+
+.entry-title {
+  font-size: 1.2em;
+  color: #888;
+  font-weight: bold;
+}
+
+.entry-content {
+  font-size: 1em;
+  color: #444;
+  margin-top: 3px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.entry-content p {
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+
+.entry-images {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 5px;
+  padding-top: 2px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.entry-image {
+  max-width: 270px;
+  max-height: 270px;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  border: 1.5px solid #ddd;
+  padding: 0px;
+  margin: 0px;
+  box-shadow: 0 4px 8px rgba(227, 223, 223, 0.292);
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  ul {
+    grid-template-columns: 1fr;
+  }
+
+  li {
+      padding: 12px;
+      padding-bottom:0px;
+  }
+
+  .entry-title {
+      font-size: 1.2em;
+  }
+
+  .entry-content {
+      font-size: 1em;
+      text-align: left;
+  }
+
+  .entry-date {
+    font-size: 1.2em;
+  }
+
+  .entry-images {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px;
+    padding-top: 2px;
+    padding-bottom: 8px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .entry-image {
+    max-width: 230px;
+    max-height: 140px;
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    border: 1.5px solid #000000;
+    padding: 0px;
+    margin: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+  }
+}

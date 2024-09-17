@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "snippets/tasks.css" %}">
+{% endblock %}
+
+{% block page_title %} 今日も一日おつかれさま {% endblock %}
+
+{% block content %}
+  <form action="/daily/create/" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+    {{ form }}
+    <button> アップする! </button>
+  </form>
+{% endblock %}
