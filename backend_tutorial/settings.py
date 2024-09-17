@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv()
 import os
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('APP_HOST', ) == 'True'
+ALLOWED_HOSTS = os.environ.get('APP_HOST').split(" ")
 
 
 # Application definition
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "snippets",
+    # "snippets",
     "daily",
 ]
 
@@ -55,8 +55,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "backend_tutorial.urls"
-# ROOT_URLCONF = "daily.urls"
+# ROOT_URLCONF = "backend_tutorial.urls"
+ROOT_URLCONF = "daily.urls"
 
 TEMPLATES = [
     {
