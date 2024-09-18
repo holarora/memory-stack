@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv()
 import os
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,8 +28,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('APP_HOST', ) == 'True'
-
+# ALLOWED_HOSTS = os.environ.get('APP_HOST').split(" ")
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'likachu.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['https://likachu.pythonanywhere.com']
 
 # Application definition
 
@@ -39,14 +40,16 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    'whitenoise.runserver_nostatic',
     "django.contrib.staticfiles",
     "rest_framework",
-    "snippets",
+    # "snippets",
     "daily",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -55,8 +58,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "backend_tutorial.urls"
-# ROOT_URLCONF = "daily.urls"
+# ROOT_URLCONF = "backend_tutorial.urls"
+ROOT_URLCONF = "daily.urls"
 
 TEMPLATES = [
     {
@@ -124,6 +127,7 @@ USE_TZ = True
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "/static/"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
