@@ -6,6 +6,7 @@ This would be perfect to add as a link under your social media handles.
 - Daily Posts: Log your thoughts and experiences onto a new card each day.
 - Upper Limit: Only the 10 most recent cards are visible to others, keeping the content fresh and relevant.
 - Shuffle Function: Draw a random card each day for a surprise look back at past memories.
+- Device Adaption: Enjoy a different view from your laptop or phone. 
 
 ### Tech Details
 - Django: The project is powered by Django (Python) for backend. 
